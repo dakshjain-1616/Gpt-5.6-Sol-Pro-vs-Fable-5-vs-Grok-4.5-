@@ -1,5 +1,9 @@
 # Three Agents, One Brief
 
+[![NEO](https://img.shields.io/badge/Built_with-NEO-00AE75?style=for-the-badge)](https://heyneo.com)
+[![VS Code](https://img.shields.io/badge/VS_Code-Extension-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white)](https://marketplace.visualstudio.com/items?itemName=NeoResearchInc.heyneo)
+[![Cursor](https://img.shields.io/badge/Cursor-Extension-000000?style=for-the-badge)](https://marketplace.cursorapi.com/items/?itemName=NeoResearchInc.heyneo)
+
 Three AI models — **Fable**, **Grok** and **GPT** — were each handed the same task:
 
 > Train a reinforcement-learning controller for a 4×4 grid of 16 traffic signals, evaluate it
@@ -9,6 +13,22 @@ Same brief, same 3-vCPU CPU-only box, no human help. This repository holds all t
 their artifacts, and an honest comparison of what came out.
 
 **Two of them finished. One never wrote the agent.**
+
+## How this was run
+
+The whole thing was done inside the **[NEO VS Code extension](https://marketplace.visualstudio.com/items?itemName=NeoResearchInc.heyneo)**
+using its **BYOK (bring your own key)** feature.
+
+That is what makes this a fair test. BYOK lets you swap the core model underneath the agent while
+everything else stays fixed — same prompt, same tools, same sandbox, same machine. So the only
+variable across these three runs is the model doing the thinking. Everything you see below is a
+difference in the model, not a difference in the harness.
+
+| | |
+|---|---|
+| 🌐 Website | **[heyneo.com](https://heyneo.com)** |
+| 🧩 VS Code | **[marketplace.visualstudio.com](https://marketplace.visualstudio.com/items?itemName=NeoResearchInc.heyneo)** |
+| ▶️ Cursor | **[marketplace.cursorapi.com](https://marketplace.cursorapi.com/items/?itemName=NeoResearchInc.heyneo)** |
 
 ## ▶ The comparison video
 
