@@ -19,11 +19,16 @@ FMB = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf"
 BG, INK, MUTED, DIM = "0x0E1014", "0xE8ECF1", "0x8A93A0", "0x5A626C"
 TEAL, AMBER, RED = "0x2ECC8F", "0xE0912F", "0xFF5C5C"
 
-# Source rollouts are 8 scenarios x 9 s. Preview the first (normal traffic).
-START, DUR = 0, 9
-SCENARIO = "NORMAL TRAFFIC"
-FABLE_MULT, FABLE_WAIT = 1.00, 20.30
-GROK_MULT, GROK_WAIT = 1.00, 4.29
+# Source rollouts are 8 scenarios x 9 s.
+#
+# Preview the LAST one (partial signal failure), not the first. Normal traffic is
+# the denominator of the degradation ratio, so previewing it would print a
+# tautological 1.00x for both models and tell the reader nothing.
+START, DUR = 63, 9
+SCENARIO = "PARTIAL SIGNAL FAILURE"
+SCENARIO_N = 8
+FABLE_MULT, FABLE_WAIT = 4.84, 98.22
+GROK_MULT, GROK_WAIT = 4.48, 19.18
 
 PANEL, PY = 560, 210
 XS = [100, 680, 1260]
@@ -49,7 +54,7 @@ ov = [f"drawbox=x={x-1}:y={PY-1}:w={PANEL+2}:h={PANEL+2}:color=0x232830:t=1" for
 ov.append(dt("SAME PROMPT   ·   SAME TOOLS   ·   SAME MACHINE   ·   DIFFERENT CORE MODEL",
              FM, 21, DIM, 100, 44))
 ov.append(dt(SCENARIO, FB, 46, INK, 100, 80))
-ov.append(dt("SCENARIO 1 / 8", FM, 21, MUTED, "w-tw-100", 92))
+ov.append(dt(f"SCENARIO {SCENARIO_N} / 8", FM, 21, MUTED, "w-tw-100", 92))
 
 heads = [("FABLE 5", "Double DQN · SUMO · learned", TEAL),
          ("GROK 4.5", "I-DQN · own micro-sim · learned", TEAL),
