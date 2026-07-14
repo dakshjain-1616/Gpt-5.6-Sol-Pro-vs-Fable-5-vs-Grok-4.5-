@@ -1,0 +1,10 @@
+  normal                 frames= 360  peak_veh= 131  completed=311
+  uneven                 frames= 360  peak_veh= 154  completed=349
+  high_demand            frames= 360  peak_veh= 291  completed=693
+  sudden_surge           frames= 360  peak_veh= 239  completed=458
+  road_closure           frames= 360  peak_veh= 135  completed=308
+  noisy_sensors          frames= 360  peak_veh= 133  completed=312
+  missing_sensors        frames= 360  peak_veh= 151  completed=294
+  partial_light_failure  frames= 360  peak_veh= 177  completed=266
+grok traces done
+GROK exit=0

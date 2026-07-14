@@ -1,0 +1,10 @@
+{
+  "episodes": 339,
+  "env_steps": 122040,
+  "train_steps": 122009,
+  "elapsed_sec": 836.5980160236359,
+  "steps_per_sec": 145.8765113740744,
+  "checkpoint": "/home/azureuser/VisualComp/Grok/checkpoints/idqn_shared.pt",
+  "final_epsilon": 0.050000000000000044,
+  "mean_ep_return_last10": -52.694025073101514
+}

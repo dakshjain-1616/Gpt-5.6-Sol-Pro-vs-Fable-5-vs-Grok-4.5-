@@ -1,0 +1,28 @@
+# ---- Python ----
+venv/
+*/venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# ---- Large rendered media ----
+# The 1080p masters are ~87 MB across four container formats. They are fully
+# reproducible from the committed checkpoints + traces:
+#
+#   Fable/venv/bin/python showcase/record_fable.py
+#   Fable/venv/bin/python showcase/render_video.py --model fable
+#
+# The web-optimised 720p mp4s in showcase/out/web/ ARE committed, and the
+# README/report embed those. Only the masters are ignored.
+showcase/out/*.mov
+showcase/out/*.webm
+showcase/out/*.gif
+showcase/out/*_rollout.mp4
+!showcase/out/web/
+
+# ---- Scratch / run detritus ----
+Fable/.tmp/
+*.log.tmp
+.DS_Store

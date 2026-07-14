@@ -1,0 +1,99 @@
+seed: 42
+device: cpu
+network:
+  grid_size: 4
+  lane_length: 300.0
+  free_speed: 13.0
+  max_vehicles_per_lane: 40
+simulation:
+  dt: 1.0
+  episode_steps: 360
+  yellow_time: 3
+  min_green: 5
+  max_green: 60
+phases:
+  n_phases: 2
+  phase_names:
+  - NS
+  - EW
+agent:
+  obs_dim: 24
+  n_actions: 2
+  hidden_dim: 64
+  gamma: 0.95
+  lr: 0.0005
+  batch_size: 64
+  buffer_size: 50000
+  target_update: 200
+  epsilon_start: 1.0
+  epsilon_end: 0.05
+  epsilon_decay_steps: 30000
+  train_start: 500
+  train_freq: 1
+training:
+  total_env_steps: 122057
+  max_episodes: 339
+  log_every: 10
+  checkpoint_every: 50
+  n_envs: 1
+  scenarios:
+  - normal
+  - uneven
+  - surge
+  - variable
+  - random_routes
+  scenario_probs:
+  - 0.3
+  - 0.2
+  - 0.15
+  - 0.2
+  - 0.15
+evaluation:
+  n_seeds: 20
+  seeds_start: 1000
+  episode_steps: 360
+  scenarios:
+  - normal
+  - high_demand
+  - sudden_surge
+  - uneven
+  - road_closure
+  - noisy_sensors
+  - missing_sensors
+  - partial_light_failure
+  checkpoint: checkpoints/idqn_shared.pt
+reward:
+  pressure_weight: 1.0
+  throughput_weight: 0.5
+  wait_weight: 0.1
+  gridlock_weight: 2.0
+  gridlock_queue_threshold: 25
+demand:
+  base_spawn_rate: 0.08
+  high_spawn_rate: 0.18
+  surge_multiplier: 3.0
+  surge_start: 120
+  surge_duration: 60
+paths:
+  checkpoint_dir: checkpoints
+  artifact_dir: artifacts
+  log_dir: logs
+  final_png: artifacts/final_traffic_map.png
+  metrics_csv: artifacts/metrics_per_seed.csv
+  metrics_json: artifacts/metrics_aggregate.json
+  benchmark_json: artifacts/benchmark_50k.json
+visualization:
+  width: 1600
+  height: 1600
+  congestion_scale:
+  - 0.0
+  - 100.0
+  queue_scale:
+  - 0.0
+  - 40.0
+  wait_scale:
+  - 0.0
+  - 180.0
+  gridlock_scale:
+  - 0.0
+  - 100.0

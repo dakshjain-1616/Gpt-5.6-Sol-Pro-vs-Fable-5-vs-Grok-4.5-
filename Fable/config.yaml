@@ -1,0 +1,97 @@
+# Adaptive Traffic-Signal Control — reproducible configuration
+# All paths relative to project root.
+
+paths:
+  net_file: network/grid4x4.net.xml
+  routes_dir: .tmp/routes
+  checkpoints_dir: checkpoints
+  results_dir: results
+  logs_dir: logs
+
+runtime:
+  torch_threads: 2          # hard cap (CPU-only node, 3 vCPU budget)
+  max_concurrent_envs: 2    # never exceeded (training uses 1 sequential env)
+
+env:
+  sim_step_length: 1.0      # seconds per SUMO step
+  decision_interval: 5      # seconds between agent decisions
+  yellow_duration: 3        # seconds of yellow inserted on phase change
+  min_green: 5              # seconds a green phase must hold before switching
+  queue_norm: 10.0          # per-lane halted-vehicle normalizer for obs
+  time_in_phase_norm: 60.0  # normalizer for time-in-phase obs feature
+  num_phases: 4             # NS-through, NS-left, EW-through, EW-left
+  lanes_per_intersection: 8 # 4 approaches x 2 lanes
+  # obs_dim = 8 lanes * 2 (queue, occupancy) + 4 phase one-hot + 1 time-in-phase = 21
+  obs_dim: 21
+
+reward:
+  pressure_coef: 0.05       # weight of (incoming - outgoing) halted count
+  waiting_coef: 0.02        # weight of incoming halted count (waiting penalty)
+
+gridlock:
+  speed_threshold: 0.1      # m/s network mean speed below which we consider stalled
+  min_vehicles: 20          # need at least this many vehicles present
+  min_duration: 60          # seconds of sustained stall to count one gridlock event
+
+agent:
+  hidden_sizes: [128, 128]
+  gamma: 0.95
+  lr: 0.0005
+  buffer_size: 100000
+  batch_size: 128
+  target_update_steps: 500     # gradient steps between target-network syncs
+  eps_start: 1.0
+  eps_end: 0.05
+  eps_decay_decisions: 40000   # env decisions over which epsilon anneals
+  learning_starts: 2000        # transitions in buffer before learning
+  grad_clip: 5.0
+
+train:
+  master_seed: 42
+  episode_length: 1500         # sim seconds per training episode
+  demand_end_margin: 300       # stop inserting vehicles this long before episode end
+  num_episodes: 3063            # benchmark-derived budget
+  checkpoint_every: 10         # episodes
+  log_every_decisions: 50
+
+demand:
+  base_rate: 0.45              # vehicles per second network-wide (normal demand)
+
+evaluation:
+  episode_length: 1800
+  demand_end_margin: 300
+  seeds_per_scenario: 20
+  seed_base: 10000             # eval seed = seed_base + scenario_index*100 + k
+  scenarios:
+    normal:
+      demand_scale: 1.0
+    high_demand:
+      demand_scale: 1.8
+    sudden_surge:
+      demand_scale: 1.0
+      surge: {start: 600, end: 900, mult: 3.0}
+    uneven_directional:
+      demand_scale: 1.0
+      directional_bias: {W: 3.0, E: 3.0, N: 0.6, S: 0.6}
+    road_closure:
+      demand_scale: 1.0
+      closure: {edges: [B1C1, C1B1], time: 600}
+    noisy_sensors:
+      demand_scale: 1.0
+      sensor_noise_sigma: 0.15
+    missing_sensors:
+      demand_scale: 1.0
+      sensor_dropout_p: 0.25
+    partial_tls_failure:
+      demand_scale: 1.0
+      tls_failure: {count: 4, time: 300}   # 4 of 16 intersections revert to fixed-time
+
+visualization:
+  output: results/final_visualization.png
+  size_px: 1600
+  dpi: 100
+  background: "#15171c"
+  congestion_scale: [0.0, 100.0]   # percent, road colour
+  queue_scale: [0.0, 40.0]         # vehicles, road thickness
+  wait_scale: [0.0, 180.0]         # seconds, intersection marker size
+  gridlock_scale: [0.0, 100.0]     # percent, text stat

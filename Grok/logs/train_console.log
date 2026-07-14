@@ -1,0 +1,35 @@
+Training Shared-IDQN total_steps=122057 max_episodes=339
+ep=10 steps=3600 sc=random_routes ret=-44.00 wait=5.45 q=0.19 done=326 eps=0.886 loss=0.05083650177758601
+ep=20 steps=7200 sc=uneven ret=-65.32 wait=5.79 q=0.26 done=396 eps=0.772 loss=0.04678339732086493
+ep=30 steps=10800 sc=normal ret=-45.45 wait=5.35 q=0.19 done=344 eps=0.658 loss=0.0595451304430349
+ep=40 steps=14400 sc=uneven ret=-61.01 wait=5.75 q=0.24 done=405 eps=0.544 loss=0.06048809585885869
+ep=50 steps=18000 sc=normal ret=-43.13 wait=5.26 q=0.18 done=318 eps=0.430 loss=0.07159321982827452
+ep=60 steps=21600 sc=variable ret=-48.02 wait=5.55 q=0.19 done=328 eps=0.316 loss=0.059495869165079464
+ep=70 steps=25200 sc=surge ret=-69.53 wait=5.24 q=0.28 done=476 eps=0.202 loss=0.06627207967556185
+ep=80 steps=28800 sc=normal ret=-37.58 wait=4.68 q=0.16 done=332 eps=0.088 loss=0.06216160645708442
+ep=90 steps=32400 sc=uneven ret=-59.41 wait=5.29 q=0.23 done=393 eps=0.050 loss=0.05151645801444021
+ep=100 steps=36000 sc=uneven ret=-47.02 wait=4.60 q=0.21 done=409 eps=0.050 loss=0.06108194881429275
+ep=110 steps=39600 sc=surge ret=-65.88 wait=5.10 q=0.27 done=482 eps=0.050 loss=0.05244665624470347
+ep=120 steps=43200 sc=surge ret=-65.44 wait=5.04 q=0.27 done=457 eps=0.050 loss=0.06015946779710551
+ep=130 steps=46800 sc=normal ret=-39.44 wait=4.60 q=0.16 done=339 eps=0.050 loss=0.0638433905214899
+ep=140 steps=50400 sc=normal ret=-43.52 wait=5.01 q=0.18 done=338 eps=0.050 loss=0.059717245881135264
+ep=150 steps=54000 sc=normal ret=-34.93 wait=4.76 q=0.15 done=291 eps=0.050 loss=0.06779745681625274
+ep=160 steps=57600 sc=normal ret=-36.17 wait=4.84 q=0.15 done=312 eps=0.050 loss=0.0480535170270337
+ep=170 steps=61200 sc=normal ret=-41.80 wait=4.59 q=0.17 done=316 eps=0.050 loss=0.05412314072665241
+ep=180 steps=64800 sc=random_routes ret=-34.64 wait=4.42 q=0.15 done=310 eps=0.050 loss=0.05045230278952254
+ep=190 steps=68400 sc=surge ret=-75.83 wait=5.45 q=0.29 done=479 eps=0.050 loss=0.05624187430108173
+ep=200 steps=72000 sc=normal ret=-33.19 wait=4.03 q=0.15 done=305 eps=0.050 loss=0.052702148931307924
+ep=210 steps=75600 sc=normal ret=-37.68 wait=4.30 q=0.16 done=312 eps=0.050 loss=0.057144184151871336
+ep=220 steps=79200 sc=surge ret=-74.60 wait=5.50 q=0.29 done=494 eps=0.050 loss=0.062199011905532745
+ep=230 steps=82800 sc=surge ret=-65.18 wait=5.13 q=0.26 done=460 eps=0.050 loss=0.05228174257402619
+ep=240 steps=86400 sc=uneven ret=-46.91 wait=5.00 q=0.19 done=371 eps=0.050 loss=0.050578248143816985
+ep=250 steps=90000 sc=uneven ret=-46.50 wait=4.55 q=0.20 done=393 eps=0.050 loss=0.058605787463279234
+ep=260 steps=93600 sc=variable ret=-39.29 wait=4.96 q=0.17 done=343 eps=0.050 loss=0.057154855551198126
+ep=270 steps=97200 sc=random_routes ret=-37.93 wait=4.40 q=0.17 done=338 eps=0.050 loss=0.060014511282659236
+ep=280 steps=100800 sc=normal ret=-45.31 wait=4.93 q=0.18 done=328 eps=0.050 loss=0.047983589742539655
+ep=290 steps=104400 sc=variable ret=-49.98 wait=5.09 q=0.20 done=370 eps=0.050 loss=0.05456653682825466
+ep=300 steps=108000 sc=surge ret=-69.29 wait=5.11 q=0.28 done=496 eps=0.050 loss=0.05323972017504275
+ep=310 steps=111600 sc=uneven ret=-38.17 wait=4.20 q=0.18 done=359 eps=0.050 loss=0.055210826879677675
+ep=320 steps=115200 sc=normal ret=-34.84 wait=4.04 q=0.16 done=317 eps=0.050 loss=0.0577822981402278
+ep=330 steps=118800 sc=surge ret=-53.35 wait=4.90 q=0.23 done=465 eps=0.050 loss=0.056754659240444504
+TRAIN_DONE {"episodes": 339, "env_steps": 122040, "train_steps": 122009, "elapsed_sec": 836.5980160236359, "steps_per_sec": 145.8765113740744, "checkpoint": "/home/azureuser/VisualComp/Grok/checkpoints/idqn_shared.pt", "final_epsilon": 0.050000000000000044, "mean_ep_return_last10": -52.694025073101514}

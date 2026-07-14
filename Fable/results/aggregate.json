@@ -1,0 +1,563 @@
+{
+  "per_scenario": {
+    "high_demand": {
+      "episodes": 20,
+      "completed": 20,
+      "failed": 0,
+      "metrics": {
+        "avg_waiting_time": {
+          "mean": 31.052801742491305,
+          "std": 1.3368173135707513,
+          "n": 20
+        },
+        "avg_travel_time": {
+          "mean": 141.09893770565543,
+          "std": 2.3720598376905806,
+          "n": 20
+        },
+        "avg_queue_length": {
+          "mean": 0.16466905400156975,
+          "std": 0.010130670647908539,
+          "n": 20
+        },
+        "p95_queue_length": {
+          "mean": 1.0,
+          "std": 0.0,
+          "n": 20
+        },
+        "completed_trips": {
+          "mean": 1221.15,
+          "std": 36.35419508117323,
+          "n": 20
+        },
+        "throughput": {
+          "mean": 2442.3,
+          "std": 72.70839016234646,
+          "n": 20
+        },
+        "gridlock_duration": {
+          "mean": 0.0,
+          "std": 0.0,
+          "n": 20
+        },
+        "gridlock_events": {
+          "mean": 0.0,
+          "std": 0.0,
+          "n": 20
+        },
+        "inference_latency_ms": {
+          "mean": 0.40054999999999996,
+          "std": 0.056781797259333036,
+          "n": 20
+        },
+        "cpu_percent": {
+          "mean": 127.11000000000001,
+          "std": 3.1136634371749294,
+          "n": 20
+        },
+        "peak_memory_mb": {
+          "mean": 389.255,
+          "std": 4.658591525343253,
+          "n": 20
+        }
+      }
+    },
+    "missing_sensors": {
+      "episodes": 20,
+      "completed": 20,
+      "failed": 0,
+      "metrics": {
+        "avg_waiting_time": {
+          "mean": 86.28413449046897,
+          "std": 25.675439699908036,
+          "n": 20
+        },
+        "avg_travel_time": {
+          "mean": 176.77425007447408,
+          "std": 18.353266707423696,
+          "n": 20
+        },
+        "avg_queue_length": {
+          "mean": 0.2502775598317385,
+          "std": 0.07609845667647694,
+          "n": 20
+        },
+        "p95_queue_length": {
+          "mean": 1.5,
+          "std": 0.5,
+          "n": 20
+        },
+        "completed_trips": {
+          "mean": 641.65,
+          "std": 25.544617828419355,
+          "n": 20
+        },
+        "throughput": {
+          "mean": 1283.3,
+          "std": 51.08923565683871,
+          "n": 20
+        },
+        "gridlock_duration": {
+          "mean": 0.0,
+          "std": 0.0,
+          "n": 20
+        },
+        "gridlock_events": {
+          "mean": 0.0,
+          "std": 0.0,
+          "n": 20
+        },
+        "inference_latency_ms": {
+          "mean": 0.39549500000000004,
+          "std": 0.11371160659756768,
+          "n": 20
+        },
+        "cpu_percent": {
+          "mean": 129.89500000000004,
+          "std": 3.5300814438196735,
+          "n": 20
+        },
+        "peak_memory_mb": {
+          "mean": 387.765,
+          "std": 1.5761583042321627,
+          "n": 20
+        }
+      }
+    },
+    "noisy_sensors": {
+      "episodes": 20,
+      "completed": 20,
+      "failed": 0,
+      "metrics": {
+        "avg_waiting_time": {
+          "mean": 68.78073758327784,
+          "std": 3.1640584181105775,
+          "n": 20
+        },
+        "avg_travel_time": {
+          "mean": 178.8647438783024,
+          "std": 4.30537021165399,
+          "n": 20
+        },
+        "avg_queue_length": {
+          "mean": 0.20041709914803504,
+          "std": 0.011677722495847778,
+          "n": 20
+        },
+        "p95_queue_length": {
+          "mean": 1.0,
+          "std": 0.0,
+          "n": 20
+        },
+        "completed_trips": {
+          "mean": 669.6,
+          "std": 26.203816515919968,
+          "n": 20
+        },
+        "throughput": {
+          "mean": 1339.2,
+          "std": 52.407633031839936,
+          "n": 20
+        },
+        "gridlock_duration": {
+          "mean": 0.0,
+          "std": 0.0,
+          "n": 20
+        },
+        "gridlock_events": {
+          "mean": 0.0,
+          "std": 0.0,
+          "n": 20
+        },
+        "inference_latency_ms": {
+          "mean": 0.371035,
+          "std": 0.043289066460250665,
+          "n": 20
+        },
+        "cpu_percent": {
+          "mean": 129.52,
+          "std": 3.7988945760576187,
+          "n": 20
+        },
+        "peak_memory_mb": {
+          "mean": 387.49500000000006,
+          "std": 1.3650915720199899,
+          "n": 20
+        }
+      }
+    },
+    "normal": {
+      "episodes": 20,
+      "completed": 20,
+      "failed": 0,
+      "metrics": {
+        "avg_waiting_time": {
+          "mean": 20.3016842134113,
+          "std": 0.9038485969926953,
+          "n": 20
+        },
+        "avg_travel_time": {
+          "mean": 125.43243446679949,
+          "std": 1.7734937346654955,
+          "n": 20
+        },
+        "avg_queue_length": {
+          "mean": 0.0602662755176425,
+          "std": 0.0040787373936099795,
+          "n": 20
+        },
+        "p95_queue_length": {
+          "mean": 1.0,
+          "std": 0.0,
+          "n": 20
+        },
+        "completed_trips": {
+          "mean": 683.45,
+          "std": 22.430949600941997,
+          "n": 20
+        },
+        "throughput": {
+          "mean": 1366.9,
+          "std": 44.86189920188399,
+          "n": 20
+        },
+        "gridlock_duration": {
+          "mean": 0.0,
+          "std": 0.0,
+          "n": 20
+        },
+        "gridlock_events": {
+          "mean": 0.0,
+          "std": 0.0,
+          "n": 20
+        },
+        "inference_latency_ms": {
+          "mean": 0.41285499999999997,
+          "std": 0.10426623362815018,
+          "n": 20
+        },
+        "cpu_percent": {
+          "mean": 134.385,
+          "std": 8.310552027392642,
+          "n": 20
+        },
+        "peak_memory_mb": {
+          "mean": 388.80000000000007,
+          "std": 3.435112807463529,
+          "n": 20
+        }
+      }
+    },
+    "partial_tls_failure": {
+      "episodes": 20,
+      "completed": 20,
+      "failed": 0,
+      "metrics": {
+        "avg_waiting_time": {
+          "mean": 98.22010471895918,
+          "std": 61.74662613736413,
+          "n": 20
+        },
+        "avg_travel_time": {
+          "mean": 161.82391602527122,
+          "std": 22.74472566665489,
+          "n": 20
+        },
+        "avg_queue_length": {
+          "mean": 0.2897445742040873,
+          "std": 0.18194275180922143,
+          "n": 20
+        },
+        "p95_queue_length": {
+          "mean": 1.7,
+          "std": 1.0999999999999999,
+          "n": 20
+        },
+        "completed_trips": {
+          "mean": 629.0,
+          "std": 44.83748431836916,
+          "n": 20
+        },
+        "throughput": {
+          "mean": 1258.0,
+          "std": 89.67496863673831,
+          "n": 20
+        },
+        "gridlock_duration": {
+          "mean": 0.0,
+          "std": 0.0,
+          "n": 20
+        },
+        "gridlock_events": {
+          "mean": 0.0,
+          "std": 0.0,
+          "n": 20
+        },
+        "inference_latency_ms": {
+          "mean": 0.35506000000000004,
+          "std": 0.06065713807953686,
+          "n": 20
+        },
+        "cpu_percent": {
+          "mean": 131.82,
+          "std": 2.776976773399444,
+          "n": 20
+        },
+        "peak_memory_mb": {
+          "mean": 387.845,
+          "std": 1.5008247732496938,
+          "n": 20
+        }
+      }
+    },
+    "road_closure": {
+      "episodes": 20,
+      "completed": 20,
+      "failed": 0,
+      "metrics": {
+        "avg_waiting_time": {
+          "mean": 25.000081753520092,
+          "std": 2.4320155578389064,
+          "n": 20
+        },
+        "avg_travel_time": {
+          "mean": 130.45040517151966,
+          "std": 3.2091844243600427,
+          "n": 20
+        },
+        "avg_queue_length": {
+          "mean": 0.07321071997284889,
+          "std": 0.007357154149443832,
+          "n": 20
+        },
+        "p95_queue_length": {
+          "mean": 1.0,
+          "std": 0.0,
+          "n": 20
+        },
+        "completed_trips": {
+          "mean": 674.85,
+          "std": 22.0142567442101,
+          "n": 20
+        },
+        "throughput": {
+          "mean": 1349.7,
+          "std": 44.0285134884202,
+          "n": 20
+        },
+        "gridlock_duration": {
+          "mean": 0.0,
+          "std": 0.0,
+          "n": 20
+        },
+        "gridlock_events": {
+          "mean": 0.0,
+          "std": 0.0,
+          "n": 20
+        },
+        "inference_latency_ms": {
+          "mean": 0.36919499999999994,
+          "std": 0.057548435904027834,
+          "n": 20
+        },
+        "cpu_percent": {
+          "mean": 135.44500000000002,
+          "std": 6.9244837352686455,
+          "n": 20
+        },
+        "peak_memory_mb": {
+          "mean": 386.80499999999995,
+          "std": 1.6716683283474576,
+          "n": 20
+        }
+      }
+    },
+    "sudden_surge": {
+      "episodes": 20,
+      "completed": 20,
+      "failed": 0,
+      "metrics": {
+        "avg_waiting_time": {
+          "mean": 32.55992506728607,
+          "std": 3.377908380506127,
+          "n": 20
+        },
+        "avg_travel_time": {
+          "mean": 142.43264638812357,
+          "std": 3.9616609744498987,
+          "n": 20
+        },
+        "avg_queue_length": {
+          "mean": 0.1338851995766163,
+          "std": 0.016203833642356752,
+          "n": 20
+        },
+        "p95_queue_length": {
+          "mean": 1.0,
+          "std": 0.0,
+          "n": 20
+        },
+        "completed_trips": {
+          "mean": 946.1,
+          "std": 30.227305536550887,
+          "n": 20
+        },
+        "throughput": {
+          "mean": 1892.2,
+          "std": 60.45461107310177,
+          "n": 20
+        },
+        "gridlock_duration": {
+          "mean": 0.0,
+          "std": 0.0,
+          "n": 20
+        },
+        "gridlock_events": {
+          "mean": 0.0,
+          "std": 0.0,
+          "n": 20
+        },
+        "inference_latency_ms": {
+          "mean": 0.363755,
+          "std": 0.05278122275014099,
+          "n": 20
+        },
+        "cpu_percent": {
+          "mean": 132.8,
+          "std": 5.400370357669926,
+          "n": 20
+        },
+        "peak_memory_mb": {
+          "mean": 389.965,
+          "std": 6.650734921796235,
+          "n": 20
+        }
+      }
+    },
+    "uneven_directional": {
+      "episodes": 20,
+      "completed": 20,
+      "failed": 0,
+      "metrics": {
+        "avg_waiting_time": {
+          "mean": 19.25833311129601,
+          "std": 0.9003644859356924,
+          "n": 20
+        },
+        "avg_travel_time": {
+          "mean": 124.02241987561766,
+          "std": 1.6360525361885594,
+          "n": 20
+        },
+        "avg_queue_length": {
+          "mean": 0.05631662290543318,
+          "std": 0.0036272396196544232,
+          "n": 20
+        },
+        "p95_queue_length": {
+          "mean": 0.75,
+          "std": 0.4330127018922193,
+          "n": 20
+        },
+        "completed_trips": {
+          "mean": 673.25,
+          "std": 18.010760672442462,
+          "n": 20
+        },
+        "throughput": {
+          "mean": 1346.5,
+          "std": 36.021521344884924,
+          "n": 20
+        },
+        "gridlock_duration": {
+          "mean": 0.0,
+          "std": 0.0,
+          "n": 20
+        },
+        "gridlock_events": {
+          "mean": 0.0,
+          "std": 0.0,
+          "n": 20
+        },
+        "inference_latency_ms": {
+          "mean": 0.41045499999999996,
+          "std": 0.12465987114946013,
+          "n": 20
+        },
+        "cpu_percent": {
+          "mean": 133.91,
+          "std": 5.493259505976394,
+          "n": 20
+        },
+        "peak_memory_mb": {
+          "mean": 387.195,
+          "std": 1.315475199310117,
+          "n": 20
+        }
+      }
+    }
+  },
+  "overall": {
+    "avg_waiting_time": {
+      "mean": 47.682225335088845,
+      "std": 38.028393714116135,
+      "n": 160
+    },
+    "avg_travel_time": {
+      "mean": 147.61246919822042,
+      "std": 23.32236110206094,
+      "n": 160
+    },
+    "avg_queue_length": {
+      "mean": 0.1535983881447464,
+      "std": 0.10880155921163064,
+      "n": 160
+    },
+    "p95_queue_length": {
+      "mean": 1.11875,
+      "std": 0.540507573952484,
+      "n": 160
+    },
+    "completed_trips": {
+      "mean": 767.38125,
+      "std": 198.03080164064758,
+      "n": 160
+    },
+    "throughput": {
+      "mean": 1534.7625,
+      "std": 396.06160328129516,
+      "n": 160
+    },
+    "gridlock_duration": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 160
+    },
+    "gridlock_events": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 160
+    },
+    "inference_latency_ms": {
+      "mean": 0.3848,
+      "std": 0.08498897207873501,
+      "n": 160
+    },
+    "cpu_percent": {
+      "mean": 131.86062499999997,
+      "std": 5.882899974449251,
+      "n": 160
+    },
+    "peak_memory_mb": {
+      "mean": 388.140625,
+      "std": 3.4854751626392333,
+      "n": 160
+    }
+  },
+  "episodes_total": 160,
+  "episodes_completed": 160,
+  "episodes_failed": 0,
+  "failed_episodes": [],
+  "checkpoint": "/home/azureuser/VisualComp/Fable/checkpoints/model_best.pt",
+  "algorithm": "Parameter-shared Double DQN"
+}

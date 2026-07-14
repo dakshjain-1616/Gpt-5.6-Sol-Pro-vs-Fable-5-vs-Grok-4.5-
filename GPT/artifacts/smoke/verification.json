@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "sumo_version": "Eclipse SUMO sumo 1.27.0",
+  "sumo_executable": "/home/azureuser/VisualComp/GPT/venv/lib/python3.12/site-packages/sumo/bin/sumo",
+  "network": "/home/azureuser/VisualComp/GPT/artifacts/smoke/tiny.net.xml",
+  "traffic_lights": 1,
+  "route_edges": [
+    "A0B0",
+    "B0B1",
+    "B1C1"
+  ],
+  "vehicle_inserted": true,
+  "progression": [
+    {
+      "step": 0,
+      "road": "A0B0",
+      "position": 5.1,
+      "speed": 0.0
+    },
+    {
+      "step": 10,
+      "road": ":B0_6",
+      "position": 4.852,
+      "speed": 6.4
+    },
+    {
+      "step": 20,
+      "road": "B1C1",
+      "position": 13.068,
+      "speed": 7.774
+    }
+  ],
+  "externally_issued_phases": [
+    {
+      "step": 0,
+      "tls": "B1",
+      "phase": 0,
+      "state": "GGgrrrGGgrrr"
+    },
+    {
+      "step": 20,
+      "tls": "B1",
+      "phase": 1,
+      "state": "yyyrrryyyrrr"
+    }
+  ],
+  "arrived_vehicles": 1,
+  "total_steps": 26,
+  "clean_exit": true
+}

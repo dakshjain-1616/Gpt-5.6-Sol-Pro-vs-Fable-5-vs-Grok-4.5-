@@ -1,0 +1,191 @@
+{
+  "per_scenario": {
+    "noisy_sensors": {
+      "episodes": 2,
+      "completed": 2,
+      "failed": 0,
+      "metrics": {
+        "avg_waiting_time": {
+          "mean": 259.83564452615656,
+          "std": 4.723090413602478,
+          "n": 2
+        },
+        "avg_travel_time": {
+          "mean": 250.02243034756765,
+          "std": 6.324661584890137,
+          "n": 2
+        },
+        "avg_queue_length": {
+          "mean": 0.7648871541023254,
+          "std": 0.002443552017211914,
+          "n": 2
+        },
+        "p95_queue_length": {
+          "mean": 4.0,
+          "std": 0.0,
+          "n": 2
+        },
+        "completed_trips": {
+          "mean": 513.0,
+          "std": 20.0,
+          "n": 2
+        },
+        "throughput": {
+          "mean": 1026.0,
+          "std": 40.0,
+          "n": 2
+        },
+        "gridlock_duration": {
+          "mean": 0.0,
+          "std": 0.0,
+          "n": 2
+        },
+        "gridlock_events": {
+          "mean": 0.0,
+          "std": 0.0,
+          "n": 2
+        },
+        "inference_latency_ms": {
+          "mean": 0.51145,
+          "std": 0.033450000000000035,
+          "n": 2
+        },
+        "cpu_percent": {
+          "mean": 122.80000000000001,
+          "std": 0.8999999999999986,
+          "n": 2
+        },
+        "peak_memory_mb": {
+          "mean": 388.20000000000005,
+          "std": 1.0999999999999943,
+          "n": 2
+        }
+      }
+    },
+    "normal": {
+      "episodes": 2,
+      "completed": 2,
+      "failed": 0,
+      "metrics": {
+        "avg_waiting_time": {
+          "mean": 376.80786221439246,
+          "std": 31.114409833440078,
+          "n": 2
+        },
+        "avg_travel_time": {
+          "mean": 302.89344552987075,
+          "std": 39.00228906728566,
+          "n": 2
+        },
+        "avg_queue_length": {
+          "mean": 1.0963671803474426,
+          "std": 0.08809465169906616,
+          "n": 2
+        },
+        "p95_queue_length": {
+          "mean": 6.5,
+          "std": 0.5,
+          "n": 2
+        },
+        "completed_trips": {
+          "mean": 431.5,
+          "std": 9.5,
+          "n": 2
+        },
+        "throughput": {
+          "mean": 863.0,
+          "std": 19.0,
+          "n": 2
+        },
+        "gridlock_duration": {
+          "mean": 0.0,
+          "std": 0.0,
+          "n": 2
+        },
+        "gridlock_events": {
+          "mean": 0.0,
+          "std": 0.0,
+          "n": 2
+        },
+        "inference_latency_ms": {
+          "mean": 0.46845,
+          "std": 0.015149999999999997,
+          "n": 2
+        },
+        "cpu_percent": {
+          "mean": 121.25,
+          "std": 0.15000000000000568,
+          "n": 2
+        },
+        "peak_memory_mb": {
+          "mean": 384.9,
+          "std": 0.09999999999999432,
+          "n": 2
+        }
+      }
+    }
+  },
+  "overall": {
+    "avg_waiting_time": {
+      "mean": 318.3217533702745,
+      "std": 62.576608799895666,
+      "n": 4
+    },
+    "avg_travel_time": {
+      "mean": 276.45793793871917,
+      "std": 38.463307319152605,
+      "n": 4
+    },
+    "avg_queue_length": {
+      "mean": 0.930627167224884,
+      "std": 0.17706798483092925,
+      "n": 4
+    },
+    "p95_queue_length": {
+      "mean": 5.25,
+      "std": 1.299038105676658,
+      "n": 4
+    },
+    "completed_trips": {
+      "mean": 472.25,
+      "std": 43.654180784891615,
+      "n": 4
+    },
+    "throughput": {
+      "mean": 944.5,
+      "std": 87.30836156978323,
+      "n": 4
+    },
+    "gridlock_duration": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 4
+    },
+    "gridlock_events": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 4
+    },
+    "inference_latency_ms": {
+      "mean": 0.48995,
+      "std": 0.03371145947597051,
+      "n": 4
+    },
+    "cpu_percent": {
+      "mean": 122.025,
+      "std": 1.0084022015049368,
+      "n": 4
+    },
+    "peak_memory_mb": {
+      "mean": 386.55,
+      "std": 1.8255136263528717,
+      "n": 4
+    }
+  },
+  "episodes_total": 4,
+  "episodes_completed": 4,
+  "episodes_failed": 0,
+  "failed_episodes": [],
+  "checkpoint": "checkpoints/smoketrain_best.pt",
+  "algorithm": "Parameter-shared Double DQN"
+}

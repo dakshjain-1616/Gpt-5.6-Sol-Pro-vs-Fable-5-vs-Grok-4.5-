@@ -1,0 +1,325 @@
+- generic [ref=f2e2]:
+  - banner [ref=f2e3]:
+    - paragraph [ref=f2e4]: Adaptive traffic-signal control · 4×4 grid · 16 intersections
+    - heading "Three agents, one brief." [level=1] [ref=f2e5]: Three agents,one brief.
+    - paragraph [ref=f2e6]:
+      - text: "Fable, Grok and GPT were each handed the same task: train a reinforcement-learning controller for a 16-intersection traffic grid and prove it holds up under stress."
+      - strong [ref=f2e7]: Two of them finished. One never wrote the agent.
+    - list [ref=f2e8]:
+      - listitem [ref=f2e9]:
+        - generic [ref=f2e11]: FABLE
+        - text: Double DQN · SUMO · 160/160 episodes
+      - listitem [ref=f2e12]:
+        - generic [ref=f2e14]: GROK
+        - text: I-DQN · custom micro-sim · 160/160 episodes
+      - listitem [ref=f2e15]:
+        - generic [ref=f2e17]: GPT
+        - text: no model · no evaluation · 26-step smoke test
+    - 'figure "The hardest scenario, all three side by side, same nine seconds. Red rings are failed signals. Watch the intersection dots: Fable and Grok mix teal and amber — each intersection is choosing its own phase. GPT''s are locked in unison, because they are on a fixed timer that senses nothing. Its red roads are the queues that follow." [ref=f2e18]':
+      - generic "Partial signal failure scenario running simultaneously in Fable, Grok and GPT" [ref=f2e19]
+  - generic [ref=f2e21]:
+    - paragraph [ref=f2e22]: Read this before any chart
+    - heading "Two of these runs cannot be scored against each other." [level=2] [ref=f2e23]
+    - generic [ref=f2e24]:
+      - paragraph [ref=f2e25]:
+        - text: Fable ran on
+        - strong [ref=f2e26]: Eclipse SUMO
+        - text: with real car-following physics, 1800-second episodes and 4 signal phases. Grok's CityFlow install failed, so it wrote its
+        - strong [ref=f2e27]: own pure-Python micro-simulator
+        - text: and ran 360-step episodes with 2 phases. Same brief, two different universes.
+      - generic [ref=f2e28]:
+        - paragraph [ref=f2e29]: Why the raw numbers are a trap
+        - paragraph [ref=f2e30]:
+          - text: Grok's mean waiting time is 7.68 s and Fable's is 47.68 s. That is
+          - strong [ref=f2e31]: not a 6× win
+          - text: "— Grok's episodes are five times shorter and its car-following is far looser, so queues have less time and less physics in which to form. Throughput is worse still: Fable reports veh/h, Grok reports veh/step. They are different quantities. Ranking them would be meaningless."
+      - paragraph [ref=f2e32]:
+        - text: "So this page compares the only two things that survive the difference in simulators:"
+        - strong [ref=f2e33]: how far each policy degrades from its own baseline
+        - text: under stress (the simulator cancels out of a ratio), and
+        - strong [ref=f2e34]: what each one cost to run
+        - text: on the same machine.
+  - generic [ref=f2e35]:
+    - paragraph [ref=f2e36]: The rollouts
+    - heading "Each policy, all eight scenarios." [level=2] [ref=f2e37]
+    - paragraph [ref=f2e38]:
+      - text: Every clip replays a
+      - strong [ref=f2e39]: frozen checkpoint
+      - text: — greedy, no training, no fine-tuning — on the exact seeds from that run's evaluation. Road colour is live queue; a red vehicle dot is stopped; a teal intersection has north–south green, amber has east–west; a red ring is a failed signal.
+    - generic [ref=f2e40]:
+      - article [ref=f2e41]:
+        - generic [ref=f2e42]:
+          - heading "Fable" [level=3] [ref=f2e43]
+          - generic [ref=f2e44]: Parameter-shared Double DQN · SUMO 1.27 via libsumo
+        - generic [ref=f2e45]:
+          - generic [ref=f2e46]:
+            - term [ref=f2e47]: Parameters
+            - definition [ref=f2e48]: 19,844
+          - generic [ref=f2e49]:
+            - term [ref=f2e50]: Phases
+            - definition [ref=f2e51]: "4"
+          - generic [ref=f2e52]:
+            - term [ref=f2e53]: Episode
+            - definition [ref=f2e54]: 1800 s · 5 s decisions
+          - generic [ref=f2e55]:
+            - term [ref=f2e56]: Training
+            - definition [ref=f2e57]: 3,063 eps · 1.70 h
+          - generic [ref=f2e58]:
+            - term [ref=f2e59]: Evaluated
+            - definition [ref=f2e60]: 160 / 160 · 0 failed
+        - 'figure "What to watch: the phase pattern is genuinely irregular — Fable holds a green while a platoon clears rather than cycling on a timer. Under partial signal failure (the last scenario) the four dead intersections force the survivors to absorb traffic they were never trained to see, and waiting time nearly quintuples." [ref=f2e61]':
+          - generic "Fable's trained policy across all eight evaluation scenarios" [ref=f2e62]
+      - article [ref=f2e64]:
+        - generic [ref=f2e65]:
+          - heading "Grok" [level=3] [ref=f2e66]
+          - generic [ref=f2e67]: Shared multi-agent I-DQN, max-pressure reward · custom Python micro-sim
+        - generic [ref=f2e68]:
+          - generic [ref=f2e69]:
+            - term [ref=f2e70]: Parameters
+            - definition [ref=f2e71]: 5,890
+          - generic [ref=f2e72]:
+            - term [ref=f2e73]: Phases
+            - definition [ref=f2e74]: "2"
+          - generic [ref=f2e75]:
+            - term [ref=f2e76]: Episode
+            - definition [ref=f2e77]: 360 steps · 1 s decisions
+          - generic [ref=f2e78]:
+            - term [ref=f2e79]: Training
+            - definition [ref=f2e80]: 339 eps · 0.23 h
+          - generic [ref=f2e81]:
+            - term [ref=f2e82]: Evaluated
+            - definition [ref=f2e83]: 160 / 160 · 0 failed
+        - 'figure "What to watch: a smaller net solving an easier control problem — two phases, not four — and it shows in how cleanly it switches. The queues that build behind its stuck signals are more visible than Fable''s because this micro-sim lets vehicles stack tighter." [ref=f2e84]':
+          - generic "Grok's trained policy across all eight evaluation scenarios" [ref=f2e85]
+      - article [ref=f2e87]:
+        - generic [ref=f2e88]:
+          - heading "GPT" [level=3] [ref=f2e89]
+          - generic [ref=f2e90]: No learned controller · fixed-time signals
+        - generic [ref=f2e91]:
+          - generic [ref=f2e92]:
+            - term [ref=f2e93]: Parameters
+            - definition [ref=f2e94]: none
+          - generic [ref=f2e95]:
+            - term [ref=f2e96]: Phases
+            - definition [ref=f2e97]: 2 (static)
+          - generic [ref=f2e98]:
+            - term [ref=f2e99]: Episode
+            - definition [ref=f2e100]: never ran
+          - generic [ref=f2e101]:
+            - term [ref=f2e102]: Training
+            - definition [ref=f2e103]: never started
+          - generic [ref=f2e104]:
+            - term [ref=f2e105]: Evaluated
+            - definition [ref=f2e106]: 0 episodes
+        - generic [ref=f2e107]:
+          - paragraph [ref=f2e108]: This is a baseline, not a result
+          - paragraph [ref=f2e109]:
+            - text: GPT has
+            - strong [ref=f2e110]: no model to record
+            - text: . So this clip shows GPT's own network — which its
+            - code [ref=f2e111]: network.py
+            - text: really does build correctly — running under SUMO's
+            - strong [ref=f2e112]: default fixed-time signal program
+            - text: ": ordinary timers that sense nothing and learn nothing. Every frame is labelled"
+            - generic [ref=f2e113]: no learned controller
+            - text: . It must never be presented as GPT's trained result. There isn't one.
+        - 'figure "Why it''s still worth showing: it is an honest un-learned reference point, and it makes two things visible that no metric conveys. Every signal cycles in lockstep — the static program has no offsets and no coordination. And under partial signal failure the fixed timer simply keeps counting, letting the vehicle count climb from roughly 32 to 87 as queues lock up behind the dead signals." [ref=f2e114]':
+          - generic "GPT's network under SUMO's default fixed-time signal program — not a trained policy" [ref=f2e115]
+  - generic [ref=f2e117]:
+    - paragraph [ref=f2e118]: The one fair comparison
+    - heading "How far each policy degrades from its own baseline." [level=2] [ref=f2e119]
+    - paragraph [ref=f2e120]:
+      - text: Each bar is that scenario's mean waiting time divided by
+      - emphasis [ref=f2e121]: that same run's
+      - text: normal-traffic waiting time. Because both the numerator and denominator come from the same simulator, the simulator, the units and the demand scale all cancel — which is what makes this the only performance chart on the page that is safe to read across runs.
+    - generic [ref=f2e122]:
+      - generic [ref=f2e123]:
+        - generic [ref=f2e124]:
+          - text: Fable
+          - generic [ref=f2e126]: · baseline 20.30 s
+        - generic [ref=f2e127]:
+          - text: Grok
+          - generic [ref=f2e129]: · baseline 4.29 s
+      - generic [ref=f2e130]:
+        - generic [ref=f2e131]:
+          - generic [ref=f2e132]: Partial signal failure
+          - generic [ref=f2e133]:
+            - generic [ref=f2e134]: 1.0× own baseline
+            - generic "Fable — 4.84× its own normal-traffic waiting time" [ref=f2e135]: 4.84×
+            - generic "Grok — 4.48× its own normal-traffic waiting time" [ref=f2e138]: 4.48×
+        - generic [ref=f2e141]:
+          - generic [ref=f2e142]: Missing sensors
+          - generic [ref=f2e143]:
+            - generic "Fable — 4.25× its own normal-traffic waiting time" [ref=f2e145]: 4.25×
+            - generic "Grok — 3.13× its own normal-traffic waiting time" [ref=f2e148]: 3.13×
+        - generic [ref=f2e151]:
+          - generic [ref=f2e152]: Noisy sensors
+          - generic [ref=f2e153]:
+            - generic "Fable — 3.39× its own normal-traffic waiting time" [ref=f2e155]: 3.39×
+            - generic "Grok — 1.27× its own normal-traffic waiting time" [ref=f2e158]: 1.27×
+        - generic [ref=f2e161]:
+          - generic [ref=f2e162]: Sudden surge
+          - generic [ref=f2e163]:
+            - generic "Fable — 1.60× its own normal-traffic waiting time" [ref=f2e165]: 1.60×
+            - generic "Grok — 1.17× its own normal-traffic waiting time" [ref=f2e168]: 1.17×
+        - generic [ref=f2e171]:
+          - generic [ref=f2e172]: High demand
+          - generic [ref=f2e173]:
+            - generic "Fable — 1.53× its own normal-traffic waiting time" [ref=f2e175]: 1.53×
+            - generic "Grok — 1.25× its own normal-traffic waiting time" [ref=f2e178]: 1.25×
+        - generic [ref=f2e181]:
+          - generic [ref=f2e182]: Road closure
+          - generic [ref=f2e183]:
+            - generic "Fable — 1.23× its own normal-traffic waiting time" [ref=f2e185]: 1.23×
+            - generic "Grok — 0.99× its own normal-traffic waiting time" [ref=f2e188]: 0.99×
+        - generic [ref=f2e191]:
+          - generic [ref=f2e192]: Uneven directional
+          - generic [ref=f2e193]:
+            - generic "Fable — 0.95× its own normal-traffic waiting time" [ref=f2e195]: 0.95×
+            - generic "Grok — 1.06× its own normal-traffic waiting time" [ref=f2e198]: 1.06×
+      - paragraph [ref=f2e201]:
+        - strong [ref=f2e202]: The two runs independently agree on what is hard.
+        - text: "Partial signal failure is the worst scenario for both (4.8× / 4.5×), missing sensors is second (4.3× / 3.1×), and road closure and uneven demand are close to free for both (0.95–1.23×). Two different algorithms on two different simulators converging on the same ranking is a far stronger result than either run's absolute numbers. Fable degrades harder throughout — consistent with SUMO's stricter dynamics and its four-phase control problem. Note also that the scenarios share names but not severities: Fable's signal failure kills 4 of 16 intersections, Grok's sticks 2 on north–south."
+  - generic [ref=f2e203]:
+    - paragraph [ref=f2e204]: Cost to run
+    - heading "What each policy cost on the same machine." [level=2] [ref=f2e205]
+    - paragraph [ref=f2e206]:
+      - text: Both runs were measured on the same CPU-only node, so these are comparable
+      - emphasis [ref=f2e207]: in kind
+      - text: — with one caveat per row.
+    - table [ref=f2e209]:
+      - rowgroup [ref=f2e210]:
+        - row [ref=f2e211]:
+          - columnheader "Metric" [ref=f2e212]
+          - columnheader "Fable" [ref=f2e213]
+          - columnheader "Grok" [ref=f2e214]
+          - columnheader "GPT" [ref=f2e215]
+          - columnheader "Read it with care" [ref=f2e216]
+      - rowgroup [ref=f2e217]:
+        - row [ref=f2e218]:
+          - cell "Mean inference latency" [ref=f2e219]
+          - cell "0.385 ms" [ref=f2e220]
+          - cell "0.012 ms" [ref=f2e221]
+          - cell "—" [ref=f2e222]
+          - 'cell "Different definitions: Fable batches all 16 intersections into one forward pass; Grok times a single agent. Grok''s net is also 3.4× smaller." [ref=f2e223]'
+        - row [ref=f2e224]:
+          - cell "p95 latency" [ref=f2e225]
+          - cell "0.479 ms" [ref=f2e226]
+          - cell "0.016 ms not like-for-like" [ref=f2e227]:
+            - text: 0.016 ms
+            - generic [ref=f2e228]: not like-for-like
+          - cell "—" [ref=f2e229]
+          - cell [ref=f2e230]:
+            - text: Grok's benchmark records no latency at all, so this is the p95 of 160 per-episode
+            - emphasis [ref=f2e231]: means
+            - text: — a systematically narrower statistic than Fable's per-inference p95.
+        - row [ref=f2e232]:
+          - cell "Peak memory" [ref=f2e233]
+          - cell "388 MB" [ref=f2e234]
+          - cell "720 MB" [ref=f2e235]
+          - cell "—" [ref=f2e236]
+          - cell "Directly comparable. Grok's smaller model carries the larger footprint." [ref=f2e237]
+        - row [ref=f2e238]:
+          - cell "Simulation speed" [ref=f2e239]
+          - cell "574 steps/s" [ref=f2e240]
+          - cell "113 steps/s" [ref=f2e241]
+          - cell "—" [ref=f2e242]
+          - cell [ref=f2e243]:
+            - text: This measures the two
+            - emphasis [ref=f2e244]: simulators
+            - text: ", not the two policies. SUMO in-process beats hand-written Python."
+        - row [ref=f2e245]:
+          - cell "Training wall clock" [ref=f2e246]
+          - cell "1.70 h" [ref=f2e247]
+          - cell "0.23 h" [ref=f2e248]
+          - cell "never started" [ref=f2e249]
+          - cell "Fable spent roughly 38× more simulation steps (4.59M vs 122k) for 7× the wall clock." [ref=f2e250]
+        - row [ref=f2e251]:
+          - cell "Gridlock events" [ref=f2e252]
+          - cell "0" [ref=f2e253]
+          - cell "0" [ref=f2e254]
+          - cell "—" [ref=f2e255]
+          - cell "Never triggered in any of the 320 episodes. That is a metric that went unexercised, not robustness demonstrated." [ref=f2e256]
+  - generic [ref=f2e257]:
+    - paragraph [ref=f2e258]: The third run
+    - heading "GPT built the scaffolding and stopped." [level=2] [ref=f2e259]
+    - paragraph [ref=f2e260]: The entire implementation is 219 lines across three Python files. What it wrote works. What it did not write is the reinforcement-learning agent the brief asked for — and its README documents a pipeline that does not exist on disk.
+    - generic [ref=f2e261]:
+      - generic [ref=f2e262]:
+        - heading "What it actually built" [level=4] [ref=f2e263]
+        - list [ref=f2e264]:
+          - listitem [ref=f2e265]:
+            - text: ✓
+            - code [ref=f2e266]: network.py
+            - text: — really does build the full 4×4 grid via netconvert, with 16 signalised junctions and valid multi-hop routes for all 8 scenarios.
+          - listitem [ref=f2e267]:
+            - text: ✓
+            - code [ref=f2e268]: simulator.py
+            - text: — a working TraCI environment wrapper. Its
+            - code [ref=f2e269]: step()
+            - text: demands 16 actions from a controller.
+          - listitem [ref=f2e270]: "✓ A SUMO smoke test that passes: 1 traffic light, 1 vehicle, 26 steps, clean exit."
+      - generic [ref=f2e271]:
+        - heading "What was never written" [level=4] [ref=f2e272]
+        - list [ref=f2e273]:
+          - listitem [ref=f2e274]:
+            - text: ✕ No
+            - code [ref=f2e275]: torch
+            - text: import anywhere in the source. No Q-network, no replay buffer, no training loop.
+          - listitem [ref=f2e276]: ✕ No checkpoint, no evaluation, no metrics, no final visualisation. Zero episodes run.
+          - listitem [ref=f2e277]:
+            - text: ✕ Nothing produces the 16 actions
+            - code [ref=f2e278]: simulator.py
+            - text: requires — the environment waits for a controller that does not exist.
+          - listitem [ref=f2e279]:
+            - text: ✕ The files its README tells you to run —
+            - code [ref=f2e280]: run_pipeline.py
+            - text: ","
+            - code [ref=f2e281]: validate_artifacts.py
+            - text: ","
+            - code [ref=f2e282]: config.yaml
+            - text: ","
+            - code [ref=f2e283]: REPORT.md
+            - text: ","
+            - code [ref=f2e284]: tests/
+            - text: — none of them exist.
+  - generic [ref=f2e285]:
+    - paragraph [ref=f2e286]: Footnotes
+    - heading "Everything that would make these numbers lie." [level=2] [ref=f2e287]
+    - list [ref=f2e288]:
+      - listitem [ref=f2e289]:
+        - strong [ref=f2e290]: Different simulators.
+        - text: SUMO's car-following against a hand-rolled Python micro-sim. No raw metric from one is on the same axis as the other.
+      - listitem [ref=f2e291]:
+        - strong [ref=f2e292]: Different episode lengths and decision intervals.
+        - text: 1800 s at 5 s decisions versus 360 steps at 1 s. Waiting and travel times are both bounded by the episode they were measured in.
+      - listitem [ref=f2e293]:
+        - strong [ref=f2e294]: Different action spaces.
+        - text: Fable chooses among 4 phases, Grok among 2. Grok is solving a strictly easier control problem, which is also why its network is a third of the size.
+      - listitem [ref=f2e295]:
+        - strong [ref=f2e296]: Scenario names match; severities do not.
+        - text: Fable's high demand is 1.8× base traffic, Grok's is 2.25×. So even the degradation ratios measure brittleness to
+        - emphasis [ref=f2e297]: each run's own version
+        - text: of a stress, not to an identical shock.
+      - listitem [ref=f2e298]:
+        - strong [ref=f2e299]: One of Grok's numbers looks like an improvement and is not.
+        - text: Its travel time under signal failure (72.3 s) falls
+        - emphasis [ref=f2e300]: below
+        - text: "its own normal (85.4 s) while waiting time rises 4.5× and completed trips drop 15%. That is completion bias inside a fixed-length episode: the long trips that would have raised the average simply never finish. It is not charted here, and it should not be reported as a win."
+      - listitem [ref=f2e301]:
+        - strong [ref=f2e302]: Neither run has a non-RL baseline.
+        - text: No fixed-time or actuated controller was ever evaluated by either, so neither absolute number can be read as "better than conventional signals." GPT's fixed-time clip is the closest thing to one on this page, and it is on a third simulator configuration.
+      - listitem [ref=f2e303]:
+        - strong [ref=f2e304]: GPT contributes no performance data.
+        - text: It appears in no chart. Where a number would go, the answer is that it was never built.
+  - contentinfo [ref=f2e305]:
+    - paragraph [ref=f2e306]:
+      - text: Every figure on this page is read from the runs' own artifacts —
+      - code [ref=f2e307]: aggregate.json
+      - text: ","
+      - code [ref=f2e308]: metrics.csv
+      - text: ","
+      - code [ref=f2e309]: benchmark.json
+      - text: ","
+      - code [ref=f2e310]: train.jsonl
+      - text: and the frozen checkpoints. Nothing is copied between runs and nothing is invented. The rollouts replay each checkpoint greedily on the seeds recorded in that run's evaluation; Grok's normal-traffic replay completes 311 trips, matching the 311 in its own per-seed CSV.

@@ -1,0 +1,11 @@
+geometry: 80 edges, 16 intersections
+  normal                 frames= 360  peak_veh=  72  completed=78
+  uneven_directional     frames= 360  peak_veh=  72  completed=92
+  high_demand            frames= 360  peak_veh= 131  completed=141
+  sudden_surge           frames= 360  peak_veh= 221  completed=125
+  road_closure           frames= 360  peak_veh=  89  completed=79
+  noisy_sensors          frames= 360  peak_veh=  95  completed=81
+  missing_sensors        frames= 360  peak_veh= 123  completed=95
+  partial_tls_failure    frames= 360  peak_veh=  98  completed=91
+fable traces done
+FABLE exit=0

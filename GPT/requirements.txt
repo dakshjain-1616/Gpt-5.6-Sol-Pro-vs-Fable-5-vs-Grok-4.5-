@@ -1,0 +1,10 @@
+eclipse-sumo==1.27.0
+traci==1.27.0
+sumolib==1.27.0
+numpy==2.2.6
+torch==2.7.1
+matplotlib==3.10.3
+Pillow==11.2.1
+psutil==7.0.0
+PyYAML==6.0.2
+pytest==8.4.1

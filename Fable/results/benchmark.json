@@ -1,0 +1,14 @@
+{
+  "benchmark_steps": 50000,
+  "elapsed_sec": 87.1,
+  "steps_per_sec": 574.3,
+  "mean_inference_latency_ms": 0.349,
+  "p95_inference_latency_ms": 0.479,
+  "target_hours": 3.0,
+  "train_overhead_factor": 1.35,
+  "derived_num_episodes": 3063,
+  "episode_length": 1500,
+  "projected_training_hours": 3.0,
+  "peak_rss_mb": 384.2,
+  "avg_cpu_percent": 120.9
+}

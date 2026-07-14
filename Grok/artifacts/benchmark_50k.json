@@ -1,0 +1,12 @@
+{
+  "benchmark_steps": 50000,
+  "elapsed_sec": 442.41500663757324,
+  "steps_per_sec": 113.01605788648133,
+  "sim_only_note": "includes env.step + policy + occasional train_step",
+  "recommended_total_env_steps": 122057,
+  "recommended_max_episodes": 339,
+  "episode_steps": 360,
+  "target_train_minutes": 18.0,
+  "device": "cpu",
+  "n_intersections": 16
+}

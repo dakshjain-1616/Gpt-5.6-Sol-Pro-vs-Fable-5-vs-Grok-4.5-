@@ -1,0 +1,9 @@
+  rendered normal                 360 frames
+  rendered uneven_directional     360 frames
+  rendered high_demand            360 frames
+  rendered sudden_surge           360 frames
+  rendered road_closure           360 frames
+  rendered noisy_sensors          360 frames
+  rendered missing_sensors        360 frames
+  rendered partial_tls_failure    360 frames
+fable: showcase/out/fable_rollout.mp4  (2880 frames, 72s, 7.0 MB)
