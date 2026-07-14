@@ -1,8 +1,18 @@
 #!/usr/bin/env python3
-"""Render the README preview GIF: one scenario, three models side by side.
+"""README / social preview GIF: one scenario, three models, and a clear verdict.
 
-Standalone from build_comparison_video.py so the GIF can be re-cut cheaply
-without re-encoding the full 88s comparison video.
+Design note, because it is load-bearing:
+
+The obvious thing to show is each model's degradation multiplier. But read alone
+it MISLEADS: Grok 4.5 posts the lower number (4.48x vs 4.84x), and a viewer will
+read that as "Grok won." It did not. Grok's number is lower because it ran on a
+simulator it wrote itself, on an easier 2-phase problem, with a policy that
+barely reacts to its own sensors (see REPORT.md 5.3).
+
+So the numbers are shown, and then the bottom line explicitly resolves them.
+The graphic must not let a reader walk away with the wrong ranking.
+
+Standalone from build_comparison_video.py so it can be re-cut cheaply.
 """
 import subprocess, pathlib, tempfile
 
@@ -19,20 +29,24 @@ FMB = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf"
 BG, INK, MUTED, DIM = "0x0E1014", "0xE8ECF1", "0x8A93A0", "0x5A626C"
 TEAL, AMBER, RED = "0x2ECC8F", "0xE0912F", "0xFF5C5C"
 
-# Source rollouts are 8 scenarios x 9 s.
-#
-# Preview the LAST one (partial signal failure), not the first. Normal traffic is
-# the denominator of the degradation ratio, so previewing it would print a
-# tautological 1.00x for both models and tell the reader nothing.
-START, DUR = 63, 9
+# Scenario 8 of 8: partial signal failure. NOT scenario 1 (normal traffic) —
+# that is the denominator of the ratio, so it would print a useless 1.00x.
+START, DUR, SCENARIO_N = 63, 9, 8
 SCENARIO = "PARTIAL SIGNAL FAILURE"
-SCENARIO_N = 8
-FABLE_MULT, FABLE_WAIT = 4.84, 98.22
-GROK_MULT, GROK_WAIT = 4.48, 19.18
 
-PANEL, PY = 560, 210
-XS = [100, 680, 1260]
+PANEL, PY = 520, 190
+XS = [120, 700, 1280]
 CX = [x + PANEL // 2 for x in XS]
+
+# (name, subtitle, colour, badge, multiplier, plain-language caption)
+COLS = [
+    ("FABLE 5",  "Double DQN · real SUMO · 4 phases", TEAL,
+     "STRONGEST RESULT", "4.84x", "waits 4.8x longer when signals fail"),
+    ("GROK 4.5", "I-DQN · own micro-sim · 2 phases",  AMBER,
+     "FINISHED, BUT...", "4.48x", "waits 4.5x longer when signals fail"),
+    ("GPT 5.6",  "no controller · fixed timer",       RED,
+     "NEVER BUILT THE AGENT", "n/a", "no model, nothing to measure"),
+]
 
 
 def dt(text, font, size, color, x, y):
@@ -50,31 +64,52 @@ f.append(f"[bg][f]overlay={XS[0]}:{PY}[b1]")
 f.append(f"[b1][g]overlay={XS[1]}:{PY}[b2]")
 f.append(f"[b2][p]overlay={XS[2]}:{PY}[b3]")
 
-ov = [f"drawbox=x={x-1}:y={PY-1}:w={PANEL+2}:h={PANEL+2}:color=0x232830:t=1" for x in XS]
-ov.append(dt("SAME PROMPT   ·   SAME TOOLS   ·   SAME MACHINE   ·   DIFFERENT CORE MODEL",
-             FM, 21, DIM, 100, 44))
-ov.append(dt(SCENARIO, FB, 46, INK, 100, 80))
-ov.append(dt(f"SCENARIO {SCENARIO_N} / 8", FM, 21, MUTED, "w-tw-100", 92))
+ov = []
+# ---- header ----
+ov.append(dt("SAME PROMPT   ·   SAME TOOLS   ·   SAME MACHINE   ·   ONLY THE CORE MODEL CHANGED",
+             FM, 20, DIM, 120, 40))
+ov.append(dt(SCENARIO, FB, 44, INK, 120, 74))
+ov.append(dt(f"HARDEST OF 8 SCENARIOS   ·   {SCENARIO_N} / 8", FM, 20, MUTED, "w-tw-120", 86))
 
-heads = [("FABLE 5", "Double DQN · SUMO · learned", TEAL),
-         ("GROK 4.5", "I-DQN · own micro-sim · learned", TEAL),
-         ("GPT 5.6", "NO LEARNED CONTROLLER", RED)]
-for cx, (nm, sub, col) in zip(CX, heads):
-    ov.append(dt(nm, FB, 30, col, f"{cx}-tw/2", PY - 62))
-    ov.append(dt(sub, FM, 17, MUTED, f"{cx}-tw/2", PY - 26))
+# ---- panels: the winner gets a lit border, the others stay recessive ----
+for x, (_, _, col, *_rest) in zip(XS, COLS):
+    weight = 2 if col == TEAL else 1
+    ov.append(f"drawbox=x={x-weight}:y={PY-weight}:w={PANEL+2*weight}"
+              f":h={PANEL+2*weight}:color={col if col == TEAL else '0x232830'}:t={weight}")
 
-SY = PY + PANEL + 46
-ov.append(dt("DEGRADATION vs ITS OWN NORMAL-TRAFFIC BASELINE", FM, 19, DIM, 100, SY))
-ov.append(f"drawbox=x=100:y={SY+30}:w=1720:h=1:color=0x232830:t=fill")
-for cx, mult, raw, col in ((CX[0], FABLE_MULT, FABLE_WAIT, TEAL),
-                           (CX[1], GROK_MULT, GROK_WAIT, AMBER)):
-    ov.append(dt(f"{mult:.2f}x", FMB, 60, col, f"{cx}-tw/2", SY + 52))
-    ov.append(dt(f"avg wait {raw:.1f} s", FM, 19, MUTED, f"{cx}-tw/2", SY + 124))
-ov.append(dt("--", FMB, 60, DIM, f"{CX[2]}-tw/2", SY + 52))
-ov.append(dt("no model was ever trained", FM, 19, RED, f"{CX[2]}-tw/2", SY + 124))
-ov.append(dt("Raw waiting times are NOT comparable across two different simulators. "
-             "The multiplier is - the simulator cancels out of a ratio.",
-             FR, 18, DIM, 100, 1012))
+# ---- per-model column ----
+Y_NAME, Y_SUB = PY - 58, PY - 26
+Y_BADGE, Y_MULT, Y_CAP = 738, 800, 872
+BW, BH = 340, 34
+
+for cx, (name, sub, col, badge, mult, cap) in zip(CX, COLS):
+    ov.append(dt(name, FB, 29, col, f"{cx}-tw/2", Y_NAME))
+    ov.append(dt(sub, FM, 16, MUTED, f"{cx}-tw/2", Y_SUB))
+
+    bx = cx - BW // 2
+    if col == TEAL:   # winner: solid badge
+        ov.append(f"drawbox=x={bx}:y={Y_BADGE}:w={BW}:h={BH}:color={col}:t=fill")
+        ov.append(dt(badge, FMB, 19, BG, f"{cx}-tw/2", Y_BADGE + 8))
+    else:             # others: outlined
+        ov.append(f"drawbox=x={bx}:y={Y_BADGE}:w={BW}:h={BH}:color={col}:t=1")
+        ov.append(dt(badge, FMB, 19, col, f"{cx}-tw/2", Y_BADGE + 8))
+
+    ov.append(dt(mult, FMB, 56, col if mult != "n/a" else DIM, f"{cx}-tw/2", Y_MULT))
+    ov.append(dt(cap, FM, 17, MUTED if mult != "n/a" else RED, f"{cx}-tw/2", Y_CAP))
+
+# ---- the bottom line: this is what stops the wrong ranking ----
+ov.append(f"drawbox=x=120:y=916:w=1680:h=1:color=0x232830:t=fill")
+ov.append(dt("Grok 4.5 posts the lower number. That is NOT the better result.",
+             FB, 26, INK, 120, 940))
+ov.append(dt("It ran on a simulator it wrote itself, on an easier 2-phase problem, and its policy "
+             "barely reacts to its own sensors.",
+             FR, 19, MUTED, 120, 982))
+ov.append(dt("FABLE 5 is the strongest run - real SUMO physics, the hardest 4-phase version of the "
+             "task, and a policy that provably uses its input.",
+             FB, 21, TEAL, 120, 1014))
+ov.append(dt("Raw seconds are not comparable across different simulators. Only the multiplier is. "
+             "Full working in REPORT.md",
+             FM, 15, DIM, 120, 1052))
 
 f.append("[b3]" + ",".join(ov) +
          ",fps=12,scale=900:-1:flags=lanczos,split[a][b];"

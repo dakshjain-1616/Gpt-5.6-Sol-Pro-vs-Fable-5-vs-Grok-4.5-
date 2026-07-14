@@ -36,11 +36,17 @@ difference in the model, not a difference in the harness.
 three models side by side, synchronized, through all eight stress scenarios, with each one's
 degradation against its own baseline shown live.
 
-![Fable 5, Grok 4.5 and GPT 5.6 side by side](showcase/out/web/comparison_preview.gif)
+![Fable 5, Grok 4.5 and GPT 5.6 under partial signal failure](showcase/out/web/comparison_preview.gif)
 
-*Preview: **Fable 5**, **Grok 4.5** and **GPT 5.6** running the same scenario at the same moment.
-Fable and Grok mix teal and amber — every intersection is picking its own phase. GPT's are locked in
-unison, because they are on a fixed timer that senses nothing.*
+*The hardest scenario, all three at the same moment. Fable and Grok mix teal and amber — every
+intersection is picking its own phase. GPT's are locked in unison, because they are on a fixed timer
+that senses nothing.*
+
+**Read the numbers carefully.** Grok 4.5 posts the lower degradation (4.48× vs 4.84×), and that is
+*not* the better result. It ran on a simulator it wrote itself, on an easier 2-phase problem, and its
+policy barely reacts to its own sensors. **Fable 5 is the strongest run** — real SUMO physics, the
+hardest 4-phase version of the task, and a policy that provably uses its input.
+[Here is the full working](REPORT.md#53--groks-apparent-robustness-is-very-likely-a-policy-that-isnt-looking-at-its-sensors).
 
 There is also a short **[9-second stress clip](showcase/out/web/stress_3up.mp4)** of just the hardest
 scenario ([`stress_3up.gif`](showcase/out/web/stress_3up.gif) for inline viewing).
