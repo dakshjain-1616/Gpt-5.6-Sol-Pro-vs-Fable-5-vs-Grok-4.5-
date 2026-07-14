@@ -10,12 +10,23 @@ their artifacts, and an honest comparison of what came out.
 
 **Two of them finished. One never wrote the agent.**
 
-![All three models under partial signal failure](showcase/out/web/stress_3up.gif)
+## ▶ The comparison video
 
-*Partial signal failure — the hardest scenario — running in all three at once. Red rings are dead
-signals. Fable and Grok mix teal and amber: every intersection is picking its own phase. GPT's are
-locked in unison, because they are on a fixed timer that senses nothing. The red roads behind them
-are the queues that follow.*
+**[`showcase/out/web/comparison_3up.mp4`](showcase/out/web/comparison_3up.mp4)** — 88 s, 1080p. All
+three models side by side, synchronized, through all eight stress scenarios, with each one's
+degradation against its own baseline shown live.
+
+![All three models, side by side](showcase/out/web/comparison_preview.gif)
+
+*Preview: the three policies running the same scenario at the same moment. Fable and Grok mix teal
+and amber — every intersection is picking its own phase. GPT's are locked in unison, because they
+are on a fixed timer that senses nothing.*
+
+There is also a short **[9-second stress clip](showcase/out/web/stress_3up.mp4)** of just the hardest
+scenario ([`stress_3up.gif`](showcase/out/web/stress_3up.gif) for inline viewing).
+
+> The video shows each model's **degradation multiplier**, not its raw waiting time — because the raw
+> times come from two different simulators and are not comparable. See below.
 
 ---
 
@@ -78,10 +89,21 @@ Each scenario's mean waiting time ÷ *that same run's* normal-traffic waiting ti
 | Uneven directional | 0.95× | 1.06× |
 | *(normal baseline)* | *20.30 s* | *4.29 s* |
 
-**The two runs independently agree on what is hard.** Partial signal failure is worst for both,
-missing sensors second, and road closure and uneven demand are close to free for both. Two different
-algorithms on two different simulators converging on the same ranking is a stronger result than
-either run's absolute numbers.
+**The two runs independently agree on what is hard.** Infrastructure and sensor *failures* dominate;
+*demand* changes are cheap. Two different algorithms on two different simulators converging on the
+same ranking is a stronger result than either run's absolute numbers.
+
+**But do not read Grok's smaller numbers as "more robust."** Under noisy sensors, Grok's observation
+vector is effectively *destroyed* — its traffic features are normalized to magnitudes around 0.01,
+and the scenario adds noise of σ=0.15 across all 24 dimensions, 10–30× larger than the signal. Its
+waiting time rises 27%. A controller that barely notices its sensors being replaced with noise
+**was not using them much to begin with** — which is exactly what its training curve says
+independently (all of its improvement came from exploration decay, with no measurable policy gain
+across the last 250 episodes).
+
+Fable's *higher* sensitivity to corrupted input is evidence that it learned to use its input.
+The decisive experiment — a fixed-time baseline inside Grok's own simulator — was never run by
+anyone, and it is [the highest-value thing missing from this repo](REPORT.md#53--groks-apparent-robustness-is-very-likely-a-policy-that-isnt-looking-at-its-sensors).
 
 ---
 
