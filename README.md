@@ -36,11 +36,11 @@ difference in the model, not a difference in the harness.
 three models side by side, synchronized, through all eight stress scenarios, with each one's
 degradation against its own baseline shown live.
 
-![All three models, side by side](showcase/out/web/comparison_preview.gif)
+![Fable 5, Grok 4.5 and GPT 5.6 side by side](showcase/out/web/comparison_preview.gif)
 
-*Preview: the three policies running the same scenario at the same moment. Fable and Grok mix teal
-and amber — every intersection is picking its own phase. GPT's are locked in unison, because they
-are on a fixed timer that senses nothing.*
+*Preview: **Fable 5**, **Grok 4.5** and **GPT 5.6** running the same scenario at the same moment.
+Fable and Grok mix teal and amber — every intersection is picking its own phase. GPT's are locked in
+unison, because they are on a fixed timer that senses nothing.*
 
 There is also a short **[9-second stress clip](showcase/out/web/stress_3up.mp4)** of just the hardest
 scenario ([`stress_3up.gif`](showcase/out/web/stress_3up.gif) for inline viewing).
