@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Compose the polished 3-up comparison video: title card -> 8 scenarios -> outro."""
-import subprocess, pathlib
+import subprocess, pathlib, tempfile
 
-SRC = pathlib.Path("/home/azureuser/VisualComp/showcase/out")
-OUT = pathlib.Path("/tmp/claude-1000/-home-azureuser-VisualComp/f71be785-48f8-424d-bbbd-74bc188916f7/scratchpad")
+HERE = pathlib.Path(__file__).resolve().parent
+SRC = HERE / "out"          # the 1080p rollout masters (see README: regenerate with render_video.py)
+OUT = HERE / "out" / "web"  # committed, web-optimised output
+OUT.mkdir(parents=True, exist_ok=True)
 FB = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
 FR = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
 FM = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
@@ -155,7 +157,8 @@ f.append(f"color=c={BG}:s=1920x1080:r=30:d=11," + ",".join(oc) +
 
 f.append("[title][main][outro]concat=n=3:v=1:a=0[out]")
 
-script = OUT / "filter.txt"
+# the filtergraph is large; pass it via -filter_complex_script rather than argv
+script = pathlib.Path(tempfile.gettempdir()) / "3up_filter.txt"
 script.write_text(";\n".join(f))
 
 cmd = ["ffmpeg", "-v", "error", "-stats",
